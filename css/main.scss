@@ -1,0 +1,29 @@
+$buttonSize: 30px;
+$Gap: 30px;
+
+#board {
+    padding-left: $Gap;
+    padding-right: $Gap;
+    padding-top: $Gap;
+    padding-bottom: $Gap;
+
+    background-color: lightblue;
+    border-radius: 20px;
+
+    display: grid;
+    grid-template-columns: repeat(30, $buttonSize);
+    grid-template-rows: repeat(16, $buttonSize);
+    gap: 5px;
+}
+
+button {
+    background-color: white;
+    box-shadow: none;
+    border: none;
+    border-radius: 5px;
+    height: $buttonSize;
+    width: $buttonSize;
+}
+button:hover {
+    background-color: lightblue;
+}
