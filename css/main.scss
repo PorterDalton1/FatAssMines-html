@@ -23,7 +23,15 @@ button {
     border-radius: 5px;
     height: $buttonSize;
     width: $buttonSize;
+    display: flexbox;
 }
 button:hover {
     background-color: lightblue;
+}
+
+.mineImage {
+    -ms-flex-align: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
 }

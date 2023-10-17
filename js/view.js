@@ -85,12 +85,16 @@ function changeCell(x, y){
         firstMove = false;
     }
 
+
+    //If cell was already clicked
     if (countSharedCoordinates(clickedCells, [[x, y]]) == 1) {
         return 112;
     }
+    //If cell does not exist on board
     if (!document.getElementById(x + ',' + y)) { //If cell not on board
         return 112;
     }
+    //If cell is a flag
     if (countSharedCoordinates(flags, [[x, y]]) == 1) {
         return 113;
     }
@@ -98,10 +102,16 @@ function changeCell(x, y){
     button.style.color = 'black';
     button.style.fontSize = '12pt'
     button.style.fontWeight = 'bold';
+
+    //If cell is a mine
     if (countSharedCoordinates(mines, [[x, y]]) == 1) {
         for (let i = 0; i < mines.length; i++) {
+            let mineImage = document.createElement('img');
+            mineImage.src = 'img/mine.png';
+            mineImage.className = 'mineImage';
             button = document.getElementById(mines[i][0] + ',' + mines[i][1]);
             button.style.backgroundColor = 'red';
+            button.appendChild(mineImage);
         }
         return 114;
     } else if (minesNear(x, y) >= 1) {
@@ -124,8 +134,8 @@ function changeCell(x, y){
     } else {
         button.style.backgroundColor = 'transparent';
         let neighbors = [[x - 1, y + 1], [x, y + 1], [x + 1, y + 1], 
-                        [x - 1, y    ],             [x + 1, y    ],
-                        [x - 1, y - 1], [x, y - 1], [x + 1, y - 1]];
+                         [x - 1, y    ],             [x + 1, y    ],
+                         [x - 1, y - 1], [x, y - 1], [x + 1, y - 1]];
         clickedCells.push([x, y]);
         for (let i = 0; i < neighbors.length; i++) {
             changeCell(neighbors[i][0], neighbors[i][1]);
@@ -159,9 +169,9 @@ function makeMines(length, width, numberOfMines) {
     for (let i = 0; i < numberOfMines; i++) {
         let x = Math.floor(Math.random() * width);
         let y = Math.floor(Math.random() * length);
-        while (isSubArray(mines, [[x, y]])) {
-            x = Math.floor(Math.random() * length);
-            y = Math.floor(Math.random() * width);
+        while (isSubArray([x,y], mines)) {
+            x = Math.floor(Math.random() * width);
+            y = Math.floor(Math.random() * length);
         }
         mines.push([x, y]);
     }
